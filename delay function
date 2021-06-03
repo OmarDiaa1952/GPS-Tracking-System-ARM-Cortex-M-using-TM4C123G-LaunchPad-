@@ -24,10 +24,21 @@ void init_Timer_delay(void)
 	NVIC_ST_CURRENT_R = 0; //to clear counter value and underflow flag of counter
 	NVIC_ST_CTRL_R |= 0x5; //to put at source clk 1 to get PROCESOR CLK NOT its 8th only and enable Timer
 }
+
+void hundredMicroSecounds(void)
+{
+	NVIC_ST_CTRL_R = NVIC_ST_CTRL_R & ~(0x00000001); //disable Timer
+	NVIC_ST_RELOAD_R = 0.1 * (16000000 - 1); //to make 1 secound as our Tiva has clk = 16 MHZ
+	NVIC_ST_CURRENT_R = 0; //to clear counter value and underflow flag of counter
+	NVIC_ST_CTRL_R |= 0x5; //to put at source clk 1 to get PROCESOR CLK NOT its 8th only and enable Timer
+}
+
 void delay(int s, int d);
 void delay_fraction(int d);
 
 unsigned int counter = 0;
+unsigned int i = 0;
+void Delay_Of_Fractions(int frac);
 
 int main()
 {
@@ -37,7 +48,7 @@ GPIO_PORTF_DATA_R |= 0x02;   //Read On
 
 	while (1)
 	{
-		delay(2, 5);
+		delay(2, 0);
 		counter++;
 		GPIO_PORTF_DATA_R ^= 0x02;
 	}
@@ -49,7 +60,12 @@ void delay(int s, int d)
 		if (s == 1) //base case of recursive
 		{
 			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
-			delay_fraction(d);
+			Delay_Of_Fractions(d);
+			return;
+		}
+		else if (s == 0)
+		{
+			Delay_Of_Fractions(d);
 			return;
 		}
 		else //recruisive body
@@ -58,13 +74,12 @@ void delay(int s, int d)
 			delay(s-1, d);
 		}
 }
-void delay_fraction(int d)
+
+void Delay_Of_Fractions(int frac)
 {
-	//fraction part
-			NVIC_ST_CTRL_R = NVIC_ST_CTRL_R & ~(0x00000001);
-			NVIC_ST_RELOAD_R = 0.5 * (16000000 - 1);
-			NVIC_ST_CURRENT_R = 0; 
-			NVIC_ST_CTRL_R |= 0x5;
-			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
-			return;
+	for (i = 0; i < frac; i++)
+	{
+		hundredMicroSecounds();
+		while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
+	}
 }
