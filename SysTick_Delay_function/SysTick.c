@@ -17,7 +17,6 @@ void init_PortF(void){
 }
 
 unsigned int counter = 0;  //as 2.3 secound pass counter increase and led toogle
-unsigned int i = 0; 		   //for the for loop of hundred micro seconds
 
 void init_Timer_delay(void) //intialization of SysTick Counter Timer
 {
@@ -58,6 +57,7 @@ void delay(int s, int d) //recursive function of the delay
 
 void Delay_Of_Fractions(int frac)
 {
+	int i;
 	for (i = 0; i < frac; i++)
 	{
 		hundredMicroSecounds();
