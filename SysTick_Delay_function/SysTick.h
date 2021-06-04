@@ -21,3 +21,4 @@ void init_PortF(void);
 #include "tm4c123gh6pm.h" // that has all timer files
 void init_Timer_delay(void);
 void delay(int s, int d);
+void delay_fraction(int d);
