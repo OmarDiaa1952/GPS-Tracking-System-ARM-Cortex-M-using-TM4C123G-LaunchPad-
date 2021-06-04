@@ -1,5 +1,3 @@
-#include "tm4c123gh6pm.h" // that has all timer files
-
 // SysTick intialization
 void init_Timer_delay(void);
 
