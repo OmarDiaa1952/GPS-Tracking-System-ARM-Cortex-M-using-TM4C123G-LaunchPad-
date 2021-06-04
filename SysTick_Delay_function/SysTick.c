@@ -29,40 +29,45 @@ void init_Timer_delay(void) //intialization of SysTick Counter Timer
 
 void delay(int s, int d) //recursive function of the delay
 {
-	init_Timer_delay();
-	if (s == 1) //base case of recursive
-	{
-		if ((NVIC_ST_RELOAD_R & 0x10000) == 1)
-			;
-		//fraction part
-		NVIC_ST_CTRL_R = NVIC_ST_CTRL_R & ~(0x00000001);
-		NVIC_ST_RELOAD_R = (d / 10) * (16000000 - 1);
-		NVIC_ST_CURRENT_R = 0; 
-		NVIC_ST_CTRL_R |= 0x5;
-		if ((NVIC_ST_RELOAD_R & 0x10000) == 1)
+		init_Timer_delay();
+		if (s == 1) //base case of recursive
 		{
+			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
+			if (d == 0)
+			{
+				return;
+			}
+			delay_fraction(d);
 			return;
 		}
-	}
-	else //recruisive body
-	{
-		if ((NVIC_ST_RELOAD_R & 0x10000) == 1)
+		else //recruisive body
 		{
+			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
 			delay(s-1, d);
 		}
-	}
+}
+void delay_fraction(int d)
+{
+	//fraction part
+			NVIC_ST_CTRL_R = NVIC_ST_CTRL_R & ~(0x00000001);
+			NVIC_ST_RELOAD_R = 0.5 * (16000000 - 1);
+			NVIC_ST_CURRENT_R = 0; 
+			NVIC_ST_CTRL_R |= 0x5;
+			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
+			return;
 }
 
+
 int main()
-{	
+{
 init_PortF();
 
+GPIO_PORTF_DATA_R |= 0x02;   //Read On
 
-	while (1) //example to test delay function so leds are on for 2.3 secounds then togle and stay 2.3 secounds
+	while (1)
 	{
+		delay(2, 0); //example to test delay function 2.0 secound then counter increase and led on
 		counter++;
-		GPIO_PORTF_DATA_R |= 0x02;   //Red On
-		delay(2, 3);
 		GPIO_PORTF_DATA_R ^= 0x02;
 	}
 }
