@@ -9,3 +9,4 @@ void init_Timer_delay(void);
 //delay Functions using SysTick
 void delay(int s, int d);
 void delay_fraction(int d);
+void hundredMicroSecounds(void);
