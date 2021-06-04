@@ -44,6 +44,11 @@ void delay(int s, int d) //recursive function of the delay
 			Delay_Of_Fractions(d);
 			return;
 		}
+		else if (s == 0)  //2nd base case
+		{
+			Delay_Of_Fractions(d);
+			return;
+		}
 		else //recruisive body
 		{
 			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
