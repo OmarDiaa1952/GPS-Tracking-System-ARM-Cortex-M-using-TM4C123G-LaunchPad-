@@ -37,16 +37,21 @@ void hundredMicroSecounds(void)
 
 void delay(int s, int d) //recursive function of the delay
 {
-	for (i = 0; i < s; i++)
-	{
-		init_Timer_delay();
-		while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
-	}
-	delay_fraction(d);
-	return;
+	init_Timer_delay();
+		if (s == 1) //base case of recursive
+		{
+			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
+			Delay_Of_Fractions(d);
+			return;
+		}
+		else //recruisive body
+		{
+			while ((NVIC_ST_CTRL_R & 0x00010000) == 0) {}
+			delay(s-1, d);
+		}
 }
 
-void delay_fraction(int frac)
+void Delay_Of_Fractions(int frac)
 {
 	for (i = 0; i < frac; i++)
 	{
@@ -64,7 +69,7 @@ GPIO_PORTF_DATA_R |= 0x02;   //Read On
 
 	while (1)
 	{
-		delay(2, 5); //example to test delay function 2.5 secound then counter increase and led on
+		delay(2, 1); //example to test delay function 2.1 secound then counter increase and led on
 		counter++;
 		GPIO_PORTF_DATA_R ^= 0x02;
 	}
