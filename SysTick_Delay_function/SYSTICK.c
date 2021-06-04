@@ -1,5 +1,5 @@
 #include "SYSTICK.h"
-#include "TM4C123GH6PM"
+#include "TM4C123GH6PM.h"
 
 void init_Timer_delay(void) //intialization of SysTick Counter Timer
 {
