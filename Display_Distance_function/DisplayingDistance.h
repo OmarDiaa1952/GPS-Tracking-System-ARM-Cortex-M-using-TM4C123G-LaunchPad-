@@ -4,7 +4,7 @@
 // PortD intialization
 void init_PortD(void){ 
   SYSCTL_RCGC2_R |= 0x00000008;           // 1) activate clock for Port D
-	while ((SYSCTL_PRGPIO_R & 0x08) == 0);	// 2) allow time for clock to start
+  while ((SYSCTL_PRGPIO_R & 0x08) == 0);	// 2) allow time for clock to start
 	
   GPIO_PORTD_CR_R = 0xF;                 // 4) allow changes to PD3-0
   GPIO_PORTD_AMSEL_R = 0x00;              // 5) disable analog on PD
