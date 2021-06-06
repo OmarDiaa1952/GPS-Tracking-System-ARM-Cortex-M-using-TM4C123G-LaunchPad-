@@ -20,7 +20,7 @@ void UART1_WriteString(char *str);
 
 void UART1_ReadString(char *str, char stopCh);
 
-//UART5
+//UART7
 void UART5_Init(unsigned long baudRate);
 
 void UART5_WriteChar(unsigned char ch);
