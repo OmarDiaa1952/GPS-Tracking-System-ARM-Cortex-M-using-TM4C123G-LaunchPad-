@@ -181,6 +181,15 @@
 
 //*****************************************************************************
 //
+// NVIC_ST (Timer)
+//
+//*****************************************************************************
+#define NVIC_ST_CTRL_R (*((volatile unsigned long *)0xE000E010))
+#define NVIC_ST_RELOAD_R (*((volatile unsigned long *)0xE000E014))
+#define NVIC_ST_CURRENT_R (*((volatile unsigned long *)0xE000E018))
+
+//*****************************************************************************
+//
 // System Control registers (SYSCTL)
 //
 //*****************************************************************************
@@ -193,9 +202,12 @@
 // Constants
 //
 //*****************************************************************************
+#define GPIO_LOCK_KEY 0x4C4F434B  
 #define UARTBUSY 0x00000008
 #define RXEMPTY 0x00000010
 #define TXFULL 0x00000020
+#define EARTH_RADIUS 6371000
+#define PI 3.141592653589793238
 
 //*****************************************************************************
 //
@@ -205,4 +217,5 @@
 #define SET(P_DATA,PIN) (P_DATA |= (0x01 << PIN))
 #define CLEAR(P_DATA,PIN) (P_DATA &= ~(0x01 << PIN))
 #define TOGGLE(P_DATA,PIN) (P_DATA ^= (0x01 << PIN))
+#define DEG_TO_RAD(DEG)((DEG*PI/180))
 
