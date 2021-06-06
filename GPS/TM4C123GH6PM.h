@@ -190,6 +190,15 @@
 
 //*****************************************************************************
 //
+// System Control registers (SYSCTL)
+//
+//*****************************************************************************
+#define SYSCTL_RCGCGPIO_R       (*((volatile unsigned long *)0x400FE608))
+#define SYSCTL_RCGCUART_R       (*((volatile unsigned long *)0x400FE618))
+#define SYSCTL_PRGPIO_R         (*((volatile unsigned long *)0x400FEA08))
+
+//*****************************************************************************
+//
 // Constants
 //
 //*****************************************************************************
@@ -209,3 +218,4 @@
 #define CLEAR(P_DATA,PIN) (P_DATA &= ~(0x01 << PIN))
 #define TOGGLE(P_DATA,PIN) (P_DATA ^= (0x01 << PIN))
 #define DEG_TO_RAD(DEG)((DEG*PI/180))
+
