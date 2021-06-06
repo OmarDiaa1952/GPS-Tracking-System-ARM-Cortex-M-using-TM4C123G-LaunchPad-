@@ -1,0 +1,47 @@
+* {
+  font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
+}
+body,
+html {
+  height: 100%;
+  background: linear-gradient(#eee7e7, #f3f3f3, #eee7e7);
+}
+#tracker,
+#controller,
+#header {
+  margin: 1em auto;
+  border: 1px solid #000;
+  border-radius: 7px;
+  padding: 0.7em;
+  text-align: center;
+  box-shadow: 0 0 1em 0.4em #b6b0b0;
+}
+#tracker,
+#controller {
+  min-height: 60vh;
+}
+.text-left {
+  text-align: left;
+  padding-left: 1.5em;
+}
+label {
+  font-size: 1.25em;
+}
+iframe {
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5em 0.05em #6f7e6d;
+}
+#toggle,
+#getData {
+  width: 50%;
+  margin: auto;
+  outline: none;
+}
+.activeHover:hover {
+  background-color: #d11729;
+}
+.inActiveHover:hover {
+  background-color: #14a15f;
+}
