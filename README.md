@@ -6,5 +6,5 @@ Omar Mohamed Diaaeldin Ibrahim 1802932: 7 Segment Display Schematic Diagram , GP
 Ahmed Magdy Fahmy Mohamed 1805862: LCD Code(LCD.c) , GPS header files (GPS.h , TM4C123GH6PM.h) </br>
 UART header files (UART.h , TM4C123GH6PM.h) - Done By Ahmed Mohamed Reda Mahmoud Hassan </br>
 SysTick code(SysTick.c), SysTick header files(SysTick.h, TM4C123GH6PM.h), DisplayingDistance code (DisplayingDistance.c), DisplayingDistance header(DisplayingDistance.h) - Done By Ahmed Ayman Abd-Alziz Sharf </br>
-Ahmed Osama Mohamed Elgerby Mohamed Elsawy 1803400 : UART code (UART.c , TM4C123GH6PM.h , UART.h) </br>
+Ahmed Osama Mohamed Elgerby Mohamed Elsawy 1803400 : UART code and header files(UART.c , TM4C123GH6PM.h , UART.h) </br>
 main.c, Server, ESP8266 - Done By Ahmed Magdi Mostafa Hosni </br>
