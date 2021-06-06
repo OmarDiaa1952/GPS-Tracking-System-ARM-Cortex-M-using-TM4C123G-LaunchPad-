@@ -24,6 +24,7 @@
 void LCD_INIT(void);
 void LCD_CMD(unsigned long cmd);
 void LCD_WRITE (char data);
-void Delay(int frac);
-void hundredMicroSecounds(void);
+void SysTick_Wait_Timer(int delay);
 void LCD_String(char *str);
+void delay_milli(int i);
+void delay_micro(int i);
