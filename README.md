@@ -10,5 +10,4 @@ Ahmed Ayman Abd-Alziz Sharf 1806171 : SysTick code(SysTick.c), SysTick header fi
 Ahmed Osama Mohamed Elgerby Mohamed Elsawy 1803400 : UART code and header files(UART.c , TM4C123GH6PM.h , UART.h) </br>
 Ahmed Magdi Mostafa Hosni 1808714: main.c, Server, ESP8266 </br>
 
-A cleaner version for the code is found here :
-https://drive.google.com/drive/u/0/folders/1mP5ZDCiExSgalahToejSDtaAX75oNcU0
+
