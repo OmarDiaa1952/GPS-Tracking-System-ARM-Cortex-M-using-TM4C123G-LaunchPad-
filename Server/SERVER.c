@@ -10,11 +10,11 @@ void command(char code, char * data){
 			msgCode[1] = code;
 			msgCode[2] = ',';
 
-			UART7_WriteString(msgCode);
-			UART7_WriteString(data);
-			UART7_WriteString("\n");
+			UART0_WriteString(msgCode);
+			UART0_WriteString(data);
+			UART0_WriteString("\n");
 }
-string toStringAyman(double num)
+string toString(double num,int decimalLength)
 {
 	int i;	
 	int j;
@@ -29,7 +29,7 @@ string toStringAyman(double num)
 	//before decimals
 	//int i;
 	i = 0;
-	if(num < 1){return "0.0";}
+	if(num < 1.0){return "0.00";}
 	num_fractions = num -(int) (num);
 	num_int = (int) num;
 	while ((9 - (int)(num_int))  <= 0)
@@ -65,13 +65,18 @@ string toStringAyman(double num)
 		str[n] = (char)arr[r] + 48; //copy
 		n++;
 	}
+	if(n == 0){
+		return "0.00";
+	}
 	str[n] = '.';
 	n++;
 	//int m;
-	for (m = count; m < (count + 2); m++) // decimal part
+	for (m = count; m < (count + decimalLength); m++) // decimal part
 	{
-		str[n] = (char)arr[m] + 48; //copy
-		n++;
+		if(arr[m] >= 0 && arr[m] <= 9){
+			str[n] = (char)arr[m] + 48; //copy
+			n++;
+		}
 	}
 	//if(str[0])
 	str[n] = '\0';
