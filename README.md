@@ -1,4 +1,4 @@
-# Embedded-Systems-Tiva-C
+# Introduction To Embedded Systems - GPS Tracking System using TIVA C - ARM Cortex M processor
 GPS Tracking System using TIVA C - ARM Cortex M processor </br>
 This project is Done by Group 2 Of CSE and ECE departements at Faculty of Engineering Ain Shams Univeristy. </br></br>
 
