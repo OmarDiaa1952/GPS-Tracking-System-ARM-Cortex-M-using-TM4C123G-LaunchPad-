@@ -33,7 +33,7 @@ void LCD_CMD(unsigned long cmd) {
     LCD_RS = 0x00;  						//set PA7 register select pin to low
     LCD_RW = 0x00;  						//set PA5 r/w pin to low
     LCD_EN = 0x40;  						//set enable pin to high
-    delay_micro(40);        						//short delay 
+    delay_micro(40);        						//short delay "0.1 sec"
     LCD_EN = 0x00;  						//set enable pin to low 
 }
 
@@ -42,7 +42,7 @@ void LCD_WRITE (char data ) {
     LCD_RS = 0x80;  					 //set PA7 to high
     LCD_RW = 0x00;  					 //set pA5 to low
     LCD_EN = 0x40;  					 //set the enable pin high
-    delay_micro(40);       					 //short delay 
+    delay_micro(40);       					 //short delay "0.1 sec"
     LCD_EN = 0x00;  					 //set the enable pin to low
 }
 
