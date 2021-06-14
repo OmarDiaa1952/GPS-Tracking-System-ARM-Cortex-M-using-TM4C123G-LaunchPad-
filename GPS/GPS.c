@@ -69,7 +69,7 @@ double calcDistance(volatile double latitude_1, volatile double logitude_1, vola
    d = EARTH_RADIUS * c;
 	return d;
 }
-
+// The idea of this function is done by Ahmed Magdi Mostafa
 double floatVal(char *c){
     char holder[10]; //215.34
     double result = 0;
