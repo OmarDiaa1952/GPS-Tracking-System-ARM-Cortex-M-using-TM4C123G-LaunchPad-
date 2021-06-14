@@ -10,3 +10,6 @@ void concat(char * holder, char * lat, char *log);
 
 void splitAndStoreDouble(char * data, volatile double * startLat, volatile double * startLog, volatile double * endLat, volatile double * endLog);
 	
+double convertCoords(double old);
+
+char * convertCoords2(char * old);
