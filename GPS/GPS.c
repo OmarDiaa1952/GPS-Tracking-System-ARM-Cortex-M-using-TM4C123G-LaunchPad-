@@ -9,25 +9,49 @@
 int readGPS(char * lat, char * log){ // 1 ==> error , 0 ==> good
 	//$GPRMC,200751.00,A,4047.32510,N,02929.63031,E,9.879,105.80,301117,,,A*6C
 	char data[100];
-	int i = 8;
+	char * speed;
+	char c;
+	int i = 0;
 	*lat = 0x00;
-	UART5_ReadString(data,'\n');
-	if(data[0] == '$'){
-		if(data[3] == 'R'){
-			if( (data[7] >= '0') && (data[7] <= '9') ){
-				while(data[i] != ','){i++;}i++;
-				if( (data[i] == 'A') || (data[i] == 'V') ){
-					i += 2;
-					while(data[i] != ','){*lat = data[i];lat++;i++;}
-					*lat = 0x00;i += 3;
-						while(data[i] != ','){*log = data[i];log++;i++;}
-						*lat = 0x00;
-						return 0;
-				}else {led(2);return 1;}//Corrupted Data
-			}else{led(4);delay(1,0);led(0);delay(1,0);return 1;}//GPS not ready
-		}else {return 1;}
-	}else{led(2);return 1;}//Corrupted Data
-	
+	c = UART5_ReadChar();
+	if(c == '$'){
+		c = UART5_ReadChar();
+		if(c == 'G'){
+			c = UART5_ReadChar();
+			if(c == 'P'){
+				c = UART5_ReadChar();
+				if(c == 'R'){
+					c = UART5_ReadChar();
+					if(c == 'M'){
+						c = UART5_ReadChar();
+						if(c == 'C'){
+							c = UART5_ReadChar();
+							if(c == ','){
+								c = UART5_ReadChar();
+								if(c != ','){
+									UART5_ReadString(data,'\n');
+									while(data[i] != ','){i++;}i++;
+									if( data[i] == 'A' ){
+										i += 2;
+										while(data[i] != ','){*lat = data[i];lat++;i++;}
+										*lat = 0x00;i += 3;
+											while(data[i] != ','){*log = data[i];log++;i++;}
+											*lat = 0x00;i += 3;
+											while(data[i] != ','){*speed = data[i];speed++;i++;}
+											*speed = 0x00;
+											if(floatVal(speed) > 4){led(2);return 1;}
+											return 0;
+									}else {led(4);delay(1,0);led(0);delay(1,0);}
+								}else{led(4);delay(1,0);led(0);delay(1,0);return 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return 1;
 }
 
 double calcDistance(volatile double latitude_1, volatile double logitude_1, volatile double latitude_2, volatile double logitude_2){
@@ -45,7 +69,7 @@ double calcDistance(volatile double latitude_1, volatile double logitude_1, vola
    d = EARTH_RADIUS * c;
 	return d;
 }
-// The idea of the function by Ahmed Magdi Mostafa
+
 double floatVal(char *c){
     char holder[10]; //215.34
     double result = 0;
@@ -89,8 +113,30 @@ void splitAndStoreDouble(char * data, volatile double * startLat, volatile doubl
 	
 
 void concat(char * holder, char * lat, char *log){
-	while(*lat){*holder = *lat;holder++;lat++;}
+	volatile char * lat2;
+	volatile char * log2;
+	lat2 = convertCoords2(lat);
+	while(*lat2){*holder = *lat2;holder++;lat2++;}
 	*holder = ',';holder++;
-	while(*log){*holder = *log;holder++;log++;}
+	log2 = convertCoords2(log);
+	while(*log2){*holder = *log2;holder++;log2++;}
 	*holder = 0x00;
+}
+
+	
+double convertCoords(double old){
+	return (int)(old / 100) + ((old - ((int)(old / 100) * 100))/ 60); 
+	/*
+		3003.9138
+		30 + 03.9138/60
+	*/
+}
+
+char * convertCoords2(char * old){
+	double x;
+	char * str;
+	x = floatVal(old);
+	x = convertCoords(x);
+	str = toString(x,5);
+	return str;
 }
