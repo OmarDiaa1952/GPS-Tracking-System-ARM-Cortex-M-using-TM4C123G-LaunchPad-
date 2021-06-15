@@ -53,7 +53,7 @@ void SysTick_Wait_Timer(int delay)
 	NVIC_ST_CURRENT_R = 0; 													 //to clear counter value and underflow flag of counter
 	NVIC_ST_CTRL_R |= 0x5; 	
 	while((NVIC_ST_CTRL_R&0x00010000)==0) {
-        ;                          /* wait for COUNT flag */
+        ;                          /* wait for COUNT flag (bit 16) */
     }
 }												 //to put at source clk 1 to get PROCESOR CLK NOT its 8th only and enable Timer
 void delay_milli(int i)
