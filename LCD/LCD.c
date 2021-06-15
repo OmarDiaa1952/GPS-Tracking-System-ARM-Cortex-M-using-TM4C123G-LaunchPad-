@@ -24,8 +24,8 @@ void LCD_INIT(void) {
     GPIO_PORTA_AFSEL_R &= ~0xE0;    //disable alternative functions for PA5,6,7
     GPIO_PORTA_AMSEL_R &= ~0XE0;    //disable analogue function for PA5,6,7
     GPIO_PORTA_PCTL_R &= ~0XE0;     //regular digital pins
-    GPIO_PORTA_DIR_R |= 0XE4;       //set the direction of PA5,6,7 as output
-    GPIO_PORTA_DEN_R |= 0XE4;       //enable digital PA5,6,7
+    GPIO_PORTA_DIR_R |= 0XE0;       //set the direction of PA5,6,7 as output
+    GPIO_PORTA_DEN_R |= 0XE0;       //enable digital PA5,6,7
 }
 
 void LCD_CMD(unsigned long cmd) {
