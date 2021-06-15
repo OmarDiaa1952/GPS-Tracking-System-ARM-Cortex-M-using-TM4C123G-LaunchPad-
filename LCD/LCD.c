@@ -58,7 +58,7 @@ void SysTick_Wait_Timer(int delay)
 }												 //to put at source clk 1 to get PROCESOR CLK NOT its 8th only and enable Timer
 void delay_milli(int i)
 {
- SysTick_Wait_Timer(i*16129);
+ SysTick_Wait_Timer(i*16000);
 }
 void delay_micro(int i)
 {
